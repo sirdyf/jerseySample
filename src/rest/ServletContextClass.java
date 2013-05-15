@@ -8,24 +8,32 @@ import java.util.Map;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-public class ServletContextClass implements ServletContextListener
-{
-//       public static Connection con;
-//	public static List<String> sessionMessage = new ArrayList<String>();
-	public static Map<String,String> sessionMessage = new HashMap<String,String>();
+import org.jivesoftware.smack.Connection;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
 
+public class ServletContextClass implements ServletContextListener {
 
-@Override
-public void contextDestroyed(ServletContextEvent arg0) {
-	// 
-	System.out.println("context destroyed.");
-}
+	static IConnManager myManager=null;
 
+	@Override
+	public void contextDestroyed(ServletContextEvent arg0) {
+		//
+		if (myManager != null) 	myManager.Destroy();
+		
+		System.out.println("context destroyed.");
+	}
 
-@Override
-public void contextInitialized(ServletContextEvent sce) {
-	// 
-	System.out.println("context init.");
-}
+	@Override
+	public void contextInitialized(ServletContextEvent sce) {
+		myManager = new ConnManager();
+		try {
+			myManager.Init();
+		} catch (XMPPException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("context init.");
+	}
 
 }

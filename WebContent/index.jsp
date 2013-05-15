@@ -9,5 +9,29 @@
   </head>
   <body>
     <h1>Hello World!</h1>
+	  <p>REST маршруты:</p>
+	    	<b>POST /messages -послать сообщение @FormParam("name"),@FormParam("mess")</b>
+	    <br>
+	    	<b>GET /messages -просмотр всех сообщений</b>
+	    <br>
+	    	<b>GET /messages/{param} -просмотр одного сообщения</b>
+	    <br>
+	    	<b>POST /messages/logon -авторизация</b>
+	    </br>
+	  <p>
+	    <ul>
+	      <li>
+		    <a href="http://localhost:8080/jerseySample/">Эта страница</a>
+		  <li>
+		    <a href="http://localhost:8080/jerseySample/logon.html"> авторизация на OpenFire</a>
+		  <li>
+		    <a href="http://localhost:8080/jerseySample/sendmessage.html"> послать сообщение</a>
+		  <li>
+		    <a href="http://localhost:8080/jerseySample/rest/messages/"> список всех сообщений за сеанс</a>
+		  <li>
+		    <a href="http://localhost:8080/jerseySample/rest/messages/id"> просмотр 1 сообщения(TODO)</a>
+		  </li>
+	    </ul>
+	  </p>
   </body>
 </html> 

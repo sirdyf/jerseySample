@@ -14,13 +14,25 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import org.jivesoftware.smack.XMPPException;
+
 //import com.sun.jersey.spi.resource.Singleton;
 import com.sun.jersey.api.view.Viewable;	 
 //	@Singleton
 	@Path("/messages")
 	public class MessageRestService {
-		private static String user="none";
 		
+		@POST
+		@Path("/")
+		public Response sendMessage(			
+			@FormParam("name") String name,
+			@FormParam("mess") String mess){
+			
+			System.out.println(name+"@"+mess);
+			ServletContextClass.myManager.SendMessage(name, mess);
+			return Response.status(200)
+				.entity("From:`" +ServletContextClass.myManager.GetSelfName()+ "` To:`"+name + "` message: "+mess)
+				.build();		}
 		
 		@POST
 		@Path("/logon")
@@ -28,9 +40,15 @@ import com.sun.jersey.api.view.Viewable;
 			@FormParam("name") String name,
 			@FormParam("pass") String pass) {
 	 
-			this.user=name+"@"+pass;
+			try {
+				ServletContextClass.myManager.Connect(name, pass);
+			} catch (XMPPException e) {
+				
+				e.printStackTrace();
+			}
+
 			
-			System.out.println(user);
+			System.out.println(name+"@"+pass);
 			return Response.status(200)
 				.entity("User is name : " + name + ", password : *HIDDEN*")// + pass)
 				.build();
@@ -40,18 +58,9 @@ import com.sun.jersey.api.view.Viewable;
 		@GET
 		@Produces("text/html")
 		public Response printMessages(){
-			ServletContextClass.sessionMessage.put("1","one");
-			Map<String,String> testM = new HashMap<String,String>();
-			testM.put("user", "value");
-//			testM.put("items", Arrays.asList("1", "2", "3"));
-//			List<String> l = new ArrayList<String>();
-//	        l.add("light saber");
-//	        l.add("fremen clothes");
-	        testM.put("items1", "l");
-	        testM.put("items2", "2");
-	        testM.put("items3", "3");
-	        testM.put("items4", "4");
-	        return Response.ok(new Viewable("/message", testM)).build();
+			
+			List<String> messageList = ServletContextClass.myManager.GetMessages();
+	        return Response.ok(new Viewable("/message", messageList)).build();
 //			return Response.status(200).entity("current logon is:"+this.user).build();
 		}
 		

@@ -7,9 +7,10 @@
   <title>Welcome!</title>
 </head>
 <body>
-  <h1>Welcome ${it.user}!</h1>
+<%--   <h1>Welcome ${it.user}!</h1> --%>
+  <h1>All messages</h1>
   <p>
-    items in your cart :<br />
+    items in your message :<br />
     <c:forEach var="item" items="${it}">
         ${item}<br />
     </c:forEach>
