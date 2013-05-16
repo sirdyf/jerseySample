@@ -12,18 +12,22 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.jivesoftware.smack.XMPPException;
 
 //import com.sun.jersey.spi.resource.Singleton;
 import com.sun.jersey.api.view.Viewable;	 
+
+
 //	@Singleton
 	@Path("/messages")
 	public class MessageRestService {
-		
+
 		@POST
 		@Path("/")
+		@Produces(MediaType.TEXT_HTML)
 		public Response sendMessage(			
 			@FormParam("name") String name,
 			@FormParam("mess") String mess){
@@ -31,8 +35,11 @@ import com.sun.jersey.api.view.Viewable;
 			System.out.println(name+"@"+mess);
 			ServletContextClass.myManager.SendMessage(name, mess);
 			return Response.status(200)
+//				.header("charset", "UTF-8")
+				.type(MediaType.TEXT_HTML +";charset=UTF-8")
 				.entity("From:`" +ServletContextClass.myManager.GetSelfName()+ "` To:`"+name + "` message: "+mess)
-				.build();		}
+				.build();		
+			}
 		
 		@POST
 		@Path("/logon")

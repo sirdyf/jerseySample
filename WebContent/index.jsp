@@ -21,15 +21,15 @@
 	  <p>
 	    <ul>
 	      <li>
-		    <a href="http://localhost:8080/jerseySample/">Эта страница</a>
+		    <a href="http://176.56.22.26:8080/jerseySample/">Эта страница</a>
 		  <li>
-		    <a href="http://localhost:8080/jerseySample/logon.html"> авторизация на OpenFire</a>
+		    <a href="http://176.56.22.26:8080/jerseySample/logon.html"> авторизация на OpenFire</a>
 		  <li>
-		    <a href="http://localhost:8080/jerseySample/sendmessage.html"> послать сообщение</a>
+		    <a href="http://176.56.22.26:8080/jerseySample/sendmessage.html"> послать сообщение</a>
 		  <li>
-		    <a href="http://localhost:8080/jerseySample/rest/messages/"> список всех сообщений за сеанс</a>
+		    <a href="http://176.56.22.26:8080/jerseySample/rest/messages/"> список всех сообщений за сеанс</a>
 		  <li>
-		    <a href="http://localhost:8080/jerseySample/rest/messages/id"> просмотр 1 сообщения(TODO)</a>
+		    <a href="http://176.56.22.26:8080/jerseySample/rest/messages/id"> просмотр 1 сообщения(TODO)</a>
 		  </li>
 	    </ul>
 	  </p>

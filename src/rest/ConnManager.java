@@ -93,6 +93,7 @@ public class ConnManager implements IConnManager {
 
 	@Override
 	public void SendMessage(String name, String message) {
+		if (connection == null) return;
 		if (connection.isConnected() == true){
 		
 			Chat chat = connection.getChatManager().createChat(name+"@"+serverName, new MessageListener() {
