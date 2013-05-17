@@ -1,6 +1,7 @@
 package rest;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +12,8 @@ import org.jivesoftware.smack.ChatManager;
 import org.jivesoftware.smack.ChatManagerListener;
 import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.MessageListener;
+import org.jivesoftware.smack.Roster;
+import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
@@ -23,6 +26,7 @@ public class ConnManager implements IConnManager {
 	private final static String serverName="afaneor-comp";
 //	private Map<String, String> sessionMessage = new HashMap<String, String>();
 	private java.util.List<String> sessionMessage=new ArrayList<String>();
+	private java.util.List<String> users=new ArrayList<String>();
 
 	public Connection connection=null;
 	
@@ -43,7 +47,8 @@ public class ConnManager implements IConnManager {
 			this.login=user;
 			this.password=pass;
 			connection.connect();
-			connection.login("test@afaneor-comp", "123");
+//			connection.login("test@afaneor-comp", "123");
+			connection.login(user+"@afaneor-comp", pass);
 			// Assume we've created a Connection name "connection".
 			ChatManager chatmanager = connection.getChatManager();
 			chatmanager.addChatListener(
@@ -111,6 +116,31 @@ public class ConnManager implements IConnManager {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public List<String> GetUsers() {
+		if (connection == null) return users;
+		Roster roster = connection.getRoster();
+		Collection<RosterEntry> entries = roster.getEntries();
+		users=new ArrayList<String>();
+		for (RosterEntry entry : entries) {
+			users.add(entry.getUser());
+		    System.out.println(entry);
+		}
+		return users;
+	}
+
+	@Override
+	public void DeleteHistory() {
+		sessionMessage=new ArrayList<String>();
+	}
+
+	@Override
+	public boolean IsConnect() {
+		if (connection == null) return false;
+		if (connection.isConnected() == false) return false;
+		return true;
 	}
 
 }

@@ -8,7 +8,10 @@ public interface IConnManager {
 	public void Disconnect(String user);
 	public void Destroy();
 	public java.util.List<String> GetMessages();
+	public java.util.List<String> GetUsers();
 	public String GetSelfName();
 	public void SendMessage(String name,String message);
 	public void GetMessage(String from,String mess);
+	public void DeleteHistory();
+	public boolean IsConnect();
 }

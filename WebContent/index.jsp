@@ -14,22 +14,21 @@
 	    <br>
 	    	<b>GET /messages -просмотр всех сообщений</b>
 	    <br>
-	    	<b>GET /messages/{param} -просмотр одного сообщения</b>
+	    	<b>DELETE /messages -удаление всех сообщений</b>
 	    <br>
-	    	<b>POST /messages/logon -авторизация</b>
-	    </br>
+	    	<b>GET /messages/{id} -просмотр одного сообщения(TODO)</b>
+	    <br>
+	    	<b>POST /logon -авторизация</b>
+	    <br>
+	    	<b>GET /users -список контактов</b>
+	    <br>
+	    	<b>GET /users/{name} -информация о контакте(TODO)</b>
+	    <br>
+	    	<b>GET /users/{name}/messages -сообщения контакта(TODO)</b>
 	  <p>
 	    <ul>
-	      <li>
-		    <a href="http://176.56.22.26:8080/jerseySample/">Эта страница</a>
 		  <li>
 		    <a href="http://176.56.22.26:8080/jerseySample/logon.html"> авторизация на OpenFire</a>
-		  <li>
-		    <a href="http://176.56.22.26:8080/jerseySample/sendmessage.html"> послать сообщение</a>
-		  <li>
-		    <a href="http://176.56.22.26:8080/jerseySample/rest/messages/"> список всех сообщений за сеанс</a>
-		  <li>
-		    <a href="http://176.56.22.26:8080/jerseySample/rest/messages/id"> просмотр 1 сообщения(TODO)</a>
 		  </li>
 	    </ul>
 	  </p>
