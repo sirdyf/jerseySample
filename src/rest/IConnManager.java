@@ -4,8 +4,8 @@ import org.jivesoftware.smack.XMPPException;
 
 public interface IConnManager {
 	public void Init()throws XMPPException;
-	public void Connect(String user,String pass)throws XMPPException;
-	public void Disconnect(String user);
+	public void LoginUser(String user,String pass)throws XMPPException;
+	public void LogoffUser();
 	public void Destroy();
 	public java.util.List<String> GetMessages();
 	public java.util.List<String> GetUsers();
@@ -14,4 +14,5 @@ public interface IConnManager {
 	public void GetMessage(String from,String mess);
 	public void DeleteHistory();
 	public boolean IsConnect();
+
 }

@@ -2,10 +2,7 @@ package rest;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManager;
@@ -20,11 +17,9 @@ import org.jivesoftware.smack.packet.Message;
 
 public class ConnManager implements IConnManager {
 	
-//	private Map<String, String> sessions = new HashMap<String, String>();
 	private String login=null;
 	private String password=null;
 	private final static String serverName="afaneor-comp";
-//	private Map<String, String> sessionMessage = new HashMap<String, String>();
 	private java.util.List<String> sessionMessage=new ArrayList<String>();
 	private java.util.List<String> users=new ArrayList<String>();
 
@@ -32,8 +27,6 @@ public class ConnManager implements IConnManager {
 	
 	public ConnManager(){
 //		sessionMessage.add("first");
-//		sessionMessage.add("two");
-//		sessionMessage.add("last");
 	}
 
 	@Override
@@ -42,12 +35,19 @@ public class ConnManager implements IConnManager {
 	}
 
 	@Override
-	public void Connect(String user, String pass) throws XMPPException {
-		if (connection.isConnected() == false){
+	public void LoginUser(String user, String pass) throws XMPPException {
+		if (connection==null) {
+			try {
+				this.Init();
+			} catch (XMPPException e) {
+				throw e;
+			}
+		}
+		//if (connection.isAuthenticated() == true) return;
+
 			this.login=user;
 			this.password=pass;
 			connection.connect();
-//			connection.login("test@afaneor-comp", "123");
 			connection.login(user+"@afaneor-comp", pass);
 			// Assume we've created a Connection name "connection".
 			ChatManager chatmanager = connection.getChatManager();
@@ -66,13 +66,14 @@ public class ConnManager implements IConnManager {
 			                });
 			        }
 			    });
-		}
+		
 	}
 	public void GetMessage(String from,String mess){
 		this.sessionMessage.add("recive from:`"+from+"` message:"+mess);
 	}
 	@Override
-	public void Disconnect(String user) {
+	public void LogoffUser() {
+		if (connection == null) return;
 		if (connection.isConnected() == true){
 			connection.disconnect();
 		}
@@ -139,8 +140,8 @@ public class ConnManager implements IConnManager {
 	@Override
 	public boolean IsConnect() {
 		if (connection == null) return false;
-		if (connection.isConnected() == false) return false;
-		return true;
+		if (connection.isAuthenticated()==false) return false;
+		return true;//connection.isConnected();
 	}
 
 }

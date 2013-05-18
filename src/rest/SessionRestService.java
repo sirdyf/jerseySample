@@ -1,16 +1,9 @@
 package rest;
 
-import java.net.URI;
-
-import javax.ws.rs.FormParam;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
-
-import org.jivesoftware.smack.XMPPException;
 
 import com.sun.jersey.api.view.Viewable;
 
@@ -18,7 +11,17 @@ import com.sun.jersey.api.view.Viewable;
 public class SessionRestService {
 		@GET
 		public Response mainForm(){
+			if (ServletContextClass.myManager.IsConnect()==false){
+				String result = "need authorize!";
+				return Response.status(200).entity(result).build();
+			}else{
 				return Response.ok(new Viewable("/session", ServletContextClass.myManager.GetSelfName())).build();
+			}
 		}
+		@DELETE
+		public Response logoff(){
+			ServletContextClass.myManager.LogoffUser();
+			return Response.status(200).build();
 		}
+}
 

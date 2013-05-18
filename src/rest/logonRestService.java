@@ -19,33 +19,22 @@ public class logonRestService {
 		@FormParam("pass") String pass) {
  
 		if (ServletContextClass.myManager.IsConnect()==false){
+			System.out.println("is NOT Connect!");
 			try {
-				ServletContextClass.myManager.Connect(name, pass);
+				ServletContextClass.myManager.LoginUser(name, pass);
 			} catch (XMPPException e) {
 				e.printStackTrace();
 				return Response.status(403).build();
 			}
 		}else{
-			name=ServletContextClass.myManager.GetSelfName();
+			System.out.println("isConnect!");
+			URI uri = uriInfo.getBaseUriBuilder().path("/session").build();
+			return Response.seeOther(uri).build();
 		}		
-
+		name=ServletContextClass.myManager.GetSelfName();
 		
 		System.out.println(name+"@"+pass);
-//		return Response.status(200)
-//			.entity("User is name : " + name + ", password : *HIDDEN*")// + pass)
-//			.build();
-//		URI uri = uriInfo.getBaseUriBuilder().path("../sendmessage.html").build();
 		URI uri = uriInfo.getBaseUriBuilder().path("/session").build();
 		return Response.seeOther(uri).build();
 	}	
 }
-//@POST
-//@Consumes({MediaType.APPLICATION_FORM_URLENCODED})
-//public Response putUser(@Context UriInfo uriInfo, 
-//    MultivaluedMap<String, String> formParams) {
-//
-//    // snip... do work and insert user here...
-//
-//    URI uri = uriInfo.getBaseUriBuilder().path("user.html").build();
-//    return Response.seeOther(uri).build();
-//}

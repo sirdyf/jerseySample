@@ -11,29 +11,20 @@
 	setInterval("fresh()",3000);
 		
 	function button_click(){
-	// $.ajax({
-	//     url: 'http://example.com/',
-	//     type: 'PUT',
-	//     data: 'ID=1&Name=John&Age=10', // or $('#myform').serializeArray()
-	//     success: function() { alert('PUT completed'); }
-	// });
 		var url = "/jerseySample/rest/messages";
-	// 	var representationOfDesiredState = "The cheese is old and moldy, where is the bathroom?";
 	
 		var client = new XMLHttpRequest();
 	
-// 		client.setRequestHeader("Content-Type", "text/plain");
 		client.open("DELETE", url);
 		client.onreadystatechange = function(){
 			if (client.readyState != 4) return;
 			if (client.status == 200){
-				//alert("The request succeeded!\n\nThe response representation was:\n\n" + client.responseText);
 				location.reload();
 			}else{
 				alert("The request did not succeed!\n\nThe response status was: " + client.status + " " + client.statusText + ".");
 			}
 		};
-		client.send(null); // representationOfDesiredState);
+		client.send(null); 
 	}
 	</script>
 <head>
@@ -50,6 +41,5 @@
 	<input type='button' value='clear history' onClick="button_click()">
 	<br>
 		<a href="http://176.56.22.26:8080/jerseySample/rest/session">home</a>
-	</br>
 </body>
 </html>

@@ -31,6 +31,5 @@
 		    <a href="http://176.56.22.26:8080/jerseySample/logon.html"> авторизация на OpenFire</a>
 		  </li>
 	    </ul>
-	  </p>
   </body>
 </html> 

@@ -17,6 +17,5 @@
   </p>
 	<br>
 		<a href="http://176.56.22.26:8080/jerseySample/rest/session">home</a>
-	</br>
 </body>
 </html>
